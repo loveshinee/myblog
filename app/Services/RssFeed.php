@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Item;
+use Illuminate\Http\Request;
 
 class RssFeed
 {
@@ -39,7 +40,7 @@ class RssFeed
 		$channel
 			->title(config('blog.title'))
 			->description(config('blog.description'))
-			->url(url())
+			->url('http://www.zhangzy.com.cn')
 			->language('en')
 			->copyright('Copyright (c) '.config('blog.author'))
 			->lastBuildDate($now->timestamp)
