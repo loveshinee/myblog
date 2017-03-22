@@ -8,6 +8,7 @@ use App\Tag;
 use App\Jobs\BlogIndexData;
 use Carbon\Carbon;
 use App\Services\RssFeed;
+use App\Services\SiteMap;
 
 class BlogController extends Controller
 {
@@ -37,5 +38,13 @@ class BlogController extends Controller
 
         return response($rss)
             ->header('Content-type', 'application/rss+xml');
+    }
+    
+    public function siteMap(SiteMap $siteMap)
+    {
+        $map = $siteMap->getSiteMap();
+
+        return response($map)
+          ->header('Content-type', 'text/xml');
     }
 }
