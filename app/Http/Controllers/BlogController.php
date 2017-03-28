@@ -7,6 +7,8 @@ use App\Post;
 use App\Tag;
 use App\Jobs\BlogIndexData;
 use Carbon\Carbon;
+use App\Services\RssFeed;
+use App\Services\SiteMap;
 
 class BlogController extends Controller
 {
@@ -19,7 +21,7 @@ class BlogController extends Controller
         return view($layout, $data);
     }
 
-    public function showPost($slug)
+    public function showPost($slug, Request $request)
     {
         $post = Post::with('tags')->whereSlug($slug)->firstOrFail();
         $tag  = $request->get('tag');
@@ -27,6 +29,22 @@ class BlogController extends Controller
             $tag = Tag::whereTag($tag)->firstOrFail();
         } 
 
-        return view($post->layout, compact('poast', 'tag'));
+        return view($post->layout, compact('post', 'tag'));
+    }
+
+    public function rss(RssFeed $feed)
+    {
+        $rss = $feed->getRSS();
+
+        return response($rss)
+            ->header('Content-type', 'application/rss+xml');
+    }
+    
+    public function siteMap(SiteMap $siteMap)
+    {
+        $map = $siteMap->getSiteMap();
+
+        return response($map)
+          ->header('Content-type', 'text/xml');
     }
 }
