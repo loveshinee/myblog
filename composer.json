@@ -6,8 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "dflydev/apache-mime-types": "^1.0",
+        "doctrine/dbal": "^2.5",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "michelf/php-markdown": "^1.7",
+        "michelf/php-smartypants": "dev-lib",
+        "suin/php-rss-writer": "^1.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -20,7 +25,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
